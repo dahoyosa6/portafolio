@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #F5F2EC; color: #1B1A17; font-family: 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+::selection { background: #1B1A17; color: #F5F2EC; }
+a { color: inherit; }
+</style>
+</helmet>
+<div style="background:#F5F2EC;min-height:100vh;overflow-x:hidden;">
+
+  <header style="position:sticky;top:0;z-index:60;background:rgba(245,242,236,0.82);backdrop-filter:saturate(160%) blur(10px);-webkit-backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid rgba(27,26,23,0.10);">
+    <nav style="max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px;">
+      <a href="index.html" style="text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.03em;color:#1B1A17;display:inline-flex;align-items:center;gap:8px;" style-hover="color:#BC4B2E;"><span style="color:#BC4B2E;">←</span>{{ t.back }}</a>
+      <div style="display:flex;border:1px solid rgba(27,26,23,0.18);border-radius:7px;overflow:hidden;">
+        <button onClick="{{ setEs }}" style="{{ esBtnStyle }}">ES</button>
+        <button onClick="{{ setEn }}" style="{{ enBtnStyle }}">EN</button>
+      </div>
+    </nav>
+  </header>
+
+  <article style="max-width:920px;margin:0 auto;padding:0 28px;">
+
+    <!-- HERO -->
+    <div style="padding:clamp(48px,9vw,104px) 0 clamp(36px,5vw,56px);">
+      <div style="display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;color:#79746A;margin-bottom:30px;">
+        <span style="color:#BC4B2E;">{{ t.tag }}</span>
+        <span style="width:1px;height:13px;background:rgba(27,26,23,0.2);"></span>
+        <span>2026</span>
+        <span style="width:1px;height:13px;background:rgba(27,26,23,0.2);"></span>
+        <span style="display:inline-flex;align-items:center;gap:7px;"><span style="width:7px;height:7px;border-radius:50%;background:#2E7D52;display:inline-block;"></span>{{ t.status }}</span>
+      </div>
+      <h1 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(48px,9.5vw,112px);line-height:0.92;letter-spacing:-0.02em;margin:0 0 22px;">FinanzasIQ<span style="font-style:italic;color:#BC4B2E;">.</span></h1>
+      <p style="font-family:'Instrument Serif',serif;font-size:clamp(24px,3.4vw,38px);line-height:1.12;color:#33302B;margin:0 0 22px;max-width:720px;">{{ t.tagline }}</p>
+      <p style="font-size:clamp(16px,2vw,19px);line-height:1.55;color:#56524B;max-width:640px;margin:0;">{{ t.oneLiner }}</p>
+    </div>
+
+    <!-- METRICS -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:rgba(27,26,23,0.12);border:1px solid rgba(27,26,23,0.12);margin-bottom:clamp(48px,7vw,80px);">
+      <sc-for list="{{ metrics }}" as="m" hint-placeholder-count="4">
+        <div style="background:#F5F2EC;padding:22px 20px;">
+          <div style="font-family:'Instrument Serif',serif;font-size:clamp(30px,4vw,42px);line-height:1;color:#1B1A17;">{{ m.v }}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.5;color:#79746A;margin-top:10px;">{{ m.k }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- PROBLEMA -->
+    <section style="display:grid;grid-template-columns:180px 1fr;gap:clamp(20px,4vw,56px);padding:clamp(36px,5vw,56px) 0;border-top:1px solid rgba(27,26,23,0.12);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;">{{ t.l_problem }}</div>
+      <div style="max-width:620px;">
+        <p style="font-size:clamp(17px,2.1vw,21px);line-height:1.55;color:#33302B;margin:0;">{{ t.problem }}</p>
+      </div>
+    </section>
+
+    <!-- SOLUCION -->
+    <section style="display:grid;grid-template-columns:180px 1fr;gap:clamp(20px,4vw,56px);padding:clamp(36px,5vw,56px) 0;border-top:1px solid rgba(27,26,23,0.12);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;">{{ t.l_solution }}</div>
+      <div style="max-width:620px;">
+        <p style="font-size:clamp(16px,1.9vw,18px);line-height:1.62;color:#403D37;margin:0 0 18px;">{{ t.solution }}</p>
+        <p style="font-size:clamp(16px,1.9vw,18px);line-height:1.62;color:#403D37;margin:0;">{{ t.solution2 }}</p>
+      </div>
+    </section>
+
+    <!-- CALLOUT decisions -->
+    <section style="background:#1B1A17;color:#EDE9E0;border-radius:4px;padding:clamp(32px,5vw,52px);margin:clamp(20px,3vw,32px) 0 0;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#D98B6E;margin-bottom:26px;">{{ t.l_decision }}</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,4vw,44px);">
+        <sc-for list="{{ decisions }}" as="d" hint-placeholder-count="2">
+          <div>
+            <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(22px,3vw,28px);line-height:1.1;color:#F2EEE5;margin:0 0 12px;">{{ d.t }}</h3>
+            <p style="font-size:15px;line-height:1.6;color:#B7B1A5;margin:0;">{{ d.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section style="display:grid;grid-template-columns:180px 1fr;gap:clamp(20px,4vw,56px);padding:clamp(40px,6vw,64px) 0 clamp(36px,5vw,56px);border-top:1px solid rgba(27,26,23,0.12);margin-top:clamp(40px,6vw,64px);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;">Stack</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;max-width:620px;align-content:flex-start;">
+        <sc-for list="{{ stack }}" as="s" hint-placeholder-count="8">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#33302B;border:1px solid rgba(27,26,23,0.18);border-radius:999px;padding:6px 13px;">{{ s }}</span>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- LEARNED -->
+    <section style="padding:clamp(40px,6vw,72px) 0;border-top:1px solid rgba(27,26,23,0.12);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;margin-bottom:22px;">{{ t.l_learned }}</div>
+      <p style="font-family:'Instrument Serif',serif;font-size:clamp(28px,4.4vw,52px);line-height:1.12;letter-spacing:-0.01em;margin:0;max-width:840px;">{{ t.learned }}</p>
+    </section>
+
+    <!-- LINKS / status -->
+    <section style="padding:clamp(28px,4vw,40px) 0 clamp(56px,8vw,96px);border-top:1px solid rgba(27,26,23,0.12);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;margin-bottom:16px;">{{ t.l_repo }}</div>
+      <a href="{{ t.repoHref }}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#1B1A17;border:1px solid rgba(27,26,23,0.25);border-radius:6px;padding:8px 14px;margin-bottom:20px;transition:background .15s,border-color .15s;" style-hover="background:rgba(27,26,23,0.05);border-color:#1B1A17;">{{ t.repoBtn }}<span style="color:#BC4B2E;">↗</span></a>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#79746A;margin:0;max-width:640px;">{{ t.repoNote }}</p>
+    </section>
+
+  </article>
+
+  <!-- FOOTER NAV -->
+  <footer style="background:#1B1A17;color:#EDE9E0;">
+    <div style="max-width:920px;margin:0 auto;padding:clamp(40px,6vw,64px) 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+      <a href="Saku.dc.html" style="text-decoration:none;display:inline-flex;flex-direction:column;gap:4px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8E887C;">{{ t.prev }}</span>
+        <span style="font-family:'Instrument Serif',serif;font-size:28px;color:#F2EEE5;"><span style="color:#D98B6E;">←</span> Saku</span>
+      </a>
+      <a href="index.html" style="text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:13px;color:#CFC9BD;display:inline-flex;align-items:center;gap:8px;" style-hover="color:#F2EEE5;">{{ t.allProjects }}<span style="color:#D98B6E;">→</span></a>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: 'es' };
+  setLang(l){ this.setState({ lang: l }); }
+  renderVals(){
+    const es = this.state.lang === 'es';
+    const p = (a,b)=> es ? a : b;
+    const btnBase = "font-family:'JetBrains Mono',monospace;font-size:12px;padding:5px 11px;border:none;cursor:pointer;letter-spacing:0.04em;";
+    const on = btnBase + "background:#1B1A17;color:#F5F2EC;";
+    const off = btnBase + "background:transparent;color:#79746A;";
+
+    const metrics = [
+      { v:'16', k: p('cuentas y tarjetas consolidadas','accounts & cards consolidated') },
+      { v:'54', k: p('categorías gestionadas','categories managed') },
+      { v:'~13k', k: p('líneas · dashboard SPA','lines · SPA dashboard') },
+      { v:'4.700+', k: p('líneas de documentación','lines of documentation') },
+    ];
+
+    const stack = ['Correos bancarios + OCR','n8n','Google Sheets (fuente de verdad)','Apps Script (~2.800 líneas)','Vanilla JS + Chart.js','Cloudflare Pages + Functions','Cloudflare Access (OTP)','Telegram Bot API'];
+
+    const decisions = [
+      { t: p('Save-and-ask','Save-and-ask'),
+        d: p('La ingesta nunca se bloquea esperando al usuario: guarda primero y pregunta después por Telegram. Diseñar para mi propia pereza fue la decisión de producto más importante.','Ingestion never blocks waiting for the user: it saves first and asks later via Telegram. Designing for my own laziness was the most important product decision.') },
+      { t: p('Seguridad operativa real','Real operational security'),
+        d: p('El dashboard vive detrás de Cloudflare Access (OTP). Las llamadas pasan por Pages Functions que validan JWT e inyectan el secret del lado del servidor, nunca en el cliente, con rate limiting, CSP y rotación documentada.','The dashboard sits behind Cloudflare Access (OTP). Calls go through Pages Functions that validate JWTs and inject the secret server-side, never in the client, with rate limiting, CSP, and documented rotation.') },
+    ];
+
+    const t = {
+      back: p('Portafolio','Portfolio'),
+      tag: p('Automatización · Pipeline de datos · Seguridad','Automation · Data pipeline · Security'),
+      status: p('En producción · uso diario','In production · daily use'),
+      tagline: p('Finanzas personales que se alimentan solas: registrar un movimiento baja a segundos.','Personal finances that feed themselves: logging a transaction drops to seconds.'),
+      oneLiner: p('Un pipeline end-to-end que captura, clasifica y visualiza mis finanzas automáticamente. En uso personal diario desde mayo de 2026.','An end-to-end pipeline that captures, classifies, and visualizes my finances automatically. In daily personal use since May 2026.'),
+      l_problem: p('El problema','The problem'),
+      problem: p('Mis finanzas vivían dispersas en más de 15 cuentas y tarjetas: imposible saber cuánto gastaba, las fechas de corte y pago eran un riesgo permanente, y registrar movimientos a mano es insostenible: toda app de finanzas que depende de disciplina manual muere en dos semanas.','My finances were scattered across 15+ accounts and cards: no way to know what I was spending, cut-off and payment dates were a permanent risk, and manual entry is unsustainable: any finance app that depends on manual discipline dies in two weeks.'),
+      l_solution: p('La solución','The solution'),
+      solution: p('Un sistema que se alimenta solo: los correos de notificación bancaria y las capturas con OCR entran a n8n, donde se clasifican con reglas y claves de deduplicación, y aterrizan en un Google Sheet que es la única fuente de verdad.','A self-feeding system: bank notification emails and OCR captures flow into n8n, get classified with rules and dedup keys, and land in a Google Sheet, the single source of truth.'),
+      solution2: p('Encima, un dashboard SPA (vanilla JS + Chart.js, mobile-first) en Cloudflare Pages muestra gastos, ingresos, transferencias, fechas de corte/pago de tarjetas y pagos recurrentes. Un bot de Telegram con wizard cubre la captura guiada de lo que la automatización no alcanza.','On top, a SPA dashboard (vanilla JS + Chart.js, mobile-first) on Cloudflare Pages shows expenses, income, transfers, card cut-off/payment dates, and recurring payments. A Telegram bot with a wizard covers guided capture for whatever automation can\u2019t reach.'),
+      l_decision: p('Decisiones técnicas clave','Key technical decisions'),
+      l_learned: p('Lo que aprendí','What I learned'),
+      learned: p('La fricción de captura, no las gráficas, es lo que mata los sistemas de finanzas. Y la seguridad operativa real no es opcional cuando manejas datos sensibles, aunque sean tuyos.','Capture friction, not charts, is what kills finance systems. And real operational security is not optional when you handle sensitive data, even your own.'),
+      l_repo: p('Estado y repo','Status & repo'),
+      repoBtn: p('Ver repo en GitHub','View repo on GitHub'),
+      repoHref: 'https://github.com/dahoyosa6/finanzasiq',
+      repoNote: p('Estado: en producción, uso personal diario. Documentación completa: documento de diseño (4.700+ líneas), guías de setup por módulo y runbooks: cualquier pieza se puede redesplegar siguiendo la guía. Repo público sanitizado, sin datos personales; demo o capturas disponibles en entrevista.','Status: in production, daily personal use. Fully documented: design doc (4,700+ lines), per-module setup guides, and runbooks: any piece can be redeployed by following the guide. Public sanitized repo, without personal data; demo or screenshots available on request.'),
+      allProjects: p('Todos los proyectos','All projects'),
+      prev: p('Caso anterior','Previous case'),
+    };
+
+    return {
+      t, metrics, stack, decisions,
+      esBtnStyle: es ? on : off,
+      enBtnStyle: es ? off : on,
+      setEs: () => this.setLang('es'),
+      setEn: () => this.setLang('en'),
+    };
+  }
+}
+</script>
+</body>
+</html>

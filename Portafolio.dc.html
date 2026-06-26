@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body { margin: 0; background: #F5F2EC; color: #1B1A17; font-family: 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+::selection { background: #1B1A17; color: #F5F2EC; }
+a { color: inherit; }
+@keyframes pulseDot { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.7); } }
+@media (max-width: 760px) { .nav-mid { display: none !important; } .hero-h { font-size: 62px !important; } }
+</style>
+</helmet>
+<div style="background:#F5F2EC;min-height:100vh;overflow-x:hidden;">
+
+  <header style="position:sticky;top:0;z-index:60;background:rgba(245,242,236,0.82);backdrop-filter:saturate(160%) blur(10px);-webkit-backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid rgba(27,26,23,0.10);">
+    <nav style="max-width:1120px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px;">
+      <a href="#top" style="text-decoration:none;display:flex;align-items:baseline;gap:9px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.04em;color:#1B1A17;">DAVID HOYOS</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#BC4B2E;">/ builder</span>
+      </a>
+      <div class="nav-mid" style="display:flex;align-items:center;gap:4px;">
+        <sc-for list="{{ navLinks }}" as="link" hint-placeholder-count="4">
+          <a href="{{ link.href }}" style="text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.03em;color:#79746A;padding:7px 11px;border-radius:6px;transition:color .15s,background .15s;" style-hover="color:#1B1A17;background:rgba(27,26,23,0.05);">{{ link.label }}</a>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a href="{{ cvHref }}" target="_blank" rel="noopener" style="text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.03em;color:#1B1A17;border-bottom:1px solid #BC4B2E;padding-bottom:1px;">{{ t.cv }}↗</a>
+        <div style="display:flex;border:1px solid rgba(27,26,23,0.18);border-radius:7px;overflow:hidden;">
+          <button onClick="{{ setEs }}" style="{{ esBtnStyle }}">ES</button>
+          <button onClick="{{ setEn }}" style="{{ enBtnStyle }}">EN</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" style="max-width:1120px;margin:0 auto;padding:clamp(56px,11vw,132px) 28px clamp(48px,8vw,92px);">
+    <div style="display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;color:#79746A;margin-bottom:34px;">
+      <span style="display:inline-flex;align-items:center;gap:7px;color:#BC4B2E;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#BC4B2E;animation:pulseDot 2.4s ease-in-out infinite;"></span>{{ t.availTag }}
+      </span>
+      <span style="width:1px;height:13px;background:rgba(27,26,23,0.2);"></span>
+      <span>{{ t.kicker }}</span>
+    </div>
+    <h1 class="hero-h" style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(58px,11.5vw,148px);line-height:0.92;letter-spacing:-0.018em;margin:0 0 30px;">{{ t.headline1 }}<span style="font-style:italic;color:#BC4B2E;"> {{ t.headline2 }}</span></h1>
+    <p style="max-width:660px;font-size:clamp(18px,2.1vw,22px);line-height:1.5;color:#403D37;margin:0 0 18px;font-weight:400;">{{ t.heroSub }}</p>
+    <p style="max-width:600px;font-size:15px;line-height:1.6;color:#79746A;margin:0 0 40px;">{{ t.heroSub2 }}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;">
+      <sc-for list="{{ heroLinks }}" as="hl" hint-placeholder-count="4">
+        <a href="{{ hl.href }}" target="_blank" rel="noopener" style="text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:13px;color:#1B1A17;display:inline-flex;align-items:center;gap:6px;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s;" style-hover="border-color:#1B1A17;">{{ hl.label }}<span style="color:#BC4B2E;">↗</span></a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos" style="border-top:1px solid rgba(27,26,23,0.12);">
+    <div style="max-width:1120px;margin:0 auto;padding:clamp(56px,9vw,104px) 28px;">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(40px,6vw,64px);">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#BC4B2E;margin-bottom:16px;">{{ t.workKicker }}</div>
+          <h2 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,5vw,56px);line-height:1.0;letter-spacing:-0.01em;margin:0;max-width:560px;">{{ t.workTitle }}</h2>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#33302B;max-width:300px;line-height:1.7;">{{ t.workNote }}</div>
+      </div>
+
+      <!-- Featured 2 -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(20px,3vw,40px);margin-bottom:clamp(20px,3vw,40px);">
+        <sc-for list="{{ featured }}" as="p" hint-placeholder-count="2">
+          <a href="{{ p.href }}" target="{{ p.target }}" rel="{{ p.rel }}" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;group:card;">
+            <div style="position:relative;aspect-ratio:16/10;background:#ECE7DC;border:1px solid rgba(27,26,23,0.12);border-radius:3px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;transition:border-color .2s;" style-hover="border-color:rgba(27,26,23,0.4);">
+              <sc-if value="{{ p.hasImage }}">
+                {{ p.coverEl }}
+              </sc-if>
+              <sc-if value="{{ p.noImage }}" hint-placeholder-val="{{ true }}">
+                <div style="font-family:'Instrument Serif',serif;font-size:120px;line-height:1;color:rgba(27,26,23,0.07);position:absolute;top:-14px;right:6px;">{{ p.num }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.05em;color:#79746A;position:relative;">{{ p.coverGlyph }}</div>
+                <div style="position:relative;">
+                  <div style="font-family:'Instrument Serif',serif;font-size:clamp(40px,5vw,60px);line-height:1;letter-spacing:-0.01em;color:#1B1A17;">{{ p.name }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9C968A;margin-top:8px;letter-spacing:0.04em;">{{ p.sub }}</div>
+                </div>
+              </sc-if>
+            </div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-top:18px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#79746A;">{{ p.cat }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9C968A;">{{ p.year }}</div>
+            </div>
+            <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:26px;line-height:1.05;margin:8px 0 0;color:#1B1A17;">{{ p.sub }}</h3>
+            <p style="font-size:15px;line-height:1.55;color:#56524B;margin:10px 0 16px;max-width:480px;">{{ p.oneLiner }}</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:auto;padding-top:14px;border-top:1px solid rgba(27,26,23,0.1);">
+              <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#56524B;">
+                <sc-if value="{{ p.isActive }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:50%;background:#2E7D52;display:inline-block;"></span></sc-if>
+                <sc-if value="{{ p.isInactive }}" hint-placeholder-val="{{ true }}"><span style="width:7px;height:7px;border-radius:50%;border:1.5px solid #9C968A;display:inline-block;"></span></sc-if>
+                {{ p.statusLabel }}
+              </span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#BC4B2E;font-weight:500;">{{ p.linkLabel }} →</span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+
+      <!-- Rest 3 -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(20px,3vw,40px);">
+        <sc-for list="{{ rest }}" as="p" hint-placeholder-count="3">
+          <a href="{{ p.href }}" target="{{ p.target }}" rel="{{ p.rel }}" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;">
+            <div style="position:relative;aspect-ratio:4/3;background:#ECE7DC;border:1px solid rgba(27,26,23,0.12);border-radius:3px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:18px;transition:border-color .2s;" style-hover="border-color:rgba(27,26,23,0.4);">
+              <sc-if value="{{ p.hasImage }}">
+                {{ p.coverEl }}
+              </sc-if>
+              <sc-if value="{{ p.noImage }}" hint-placeholder-val="{{ true }}">
+                <div style="font-family:'Instrument Serif',serif;font-size:88px;line-height:1;color:rgba(27,26,23,0.07);position:absolute;top:-10px;right:6px;">{{ p.num }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.05em;color:#79746A;position:relative;">{{ p.coverGlyph }}</div>
+                <div style="position:relative;">
+                  <div style="font-family:'Instrument Serif',serif;font-size:40px;line-height:1;color:#1B1A17;">{{ p.name }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9C968A;margin-top:6px;letter-spacing:0.04em;">{{ p.sub }}</div>
+                </div>
+              </sc-if>
+            </div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:16px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;color:#79746A;">{{ p.cat }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9C968A;">{{ p.year }}</div>
+            </div>
+            <p style="font-size:14.5px;line-height:1.55;color:#56524B;margin:11px 0 16px;">{{ p.oneLiner }}</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:13px;border-top:1px solid rgba(27,26,23,0.1);">
+              <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#56524B;">
+                <sc-if value="{{ p.isActive }}" hint-placeholder-val="{{ true }}"><span style="width:6px;height:6px;border-radius:50%;background:#2E7D52;display:inline-block;"></span></sc-if>
+                <sc-if value="{{ p.isInactive }}" hint-placeholder-val="{{ true }}"><span style="width:6px;height:6px;border-radius:50%;border:1.5px solid #9C968A;display:inline-block;"></span></sc-if>
+                {{ p.statusLabel }}
+              </span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#BC4B2E;font-weight:500;">{{ p.linkLabel }} ↗</span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORIA -->
+  <section id="historia" style="border-top:1px solid rgba(27,26,23,0.12);background:#1B1A17;color:#EDE9E0;">
+    <div style="max-width:1120px;margin:0 auto;padding:clamp(64px,10vw,128px) 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(40px,6vw,80px);">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#D98B6E;margin-bottom:18px;">{{ t.storyKicker }}</div>
+        <h2 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(38px,5.5vw,68px);line-height:1.0;letter-spacing:-0.01em;margin:0;">{{ t.storyTitle }}</h2>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;color:#8E887C;margin-top:28px;max-width:300px;">{{ t.storyMeta }}</p>
+      </div>
+      <div style="max-width:600px;">
+        <sc-for list="{{ story }}" as="s" hint-placeholder-count="3">
+          <p style="font-size:17px;line-height:1.62;color:#CFC9BD;margin:0 0 22px;"><span style="font-family:'Instrument Serif',serif;font-style:italic;font-size:21px;color:#F2EEE5;">{{ s.lead }}</span> {{ s.body }}</p>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO TRABAJO -->
+  <section id="trabajo" style="border-top:1px solid rgba(27,26,23,0.12);">
+    <div style="max-width:1120px;margin:0 auto;padding:clamp(56px,9vw,104px) 28px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#BC4B2E;margin-bottom:16px;">{{ t.workhowKicker }}</div>
+      <h2 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,5vw,56px);line-height:1.0;letter-spacing:-0.01em;margin:0 0 clamp(40px,6vw,64px);max-width:520px;">{{ t.workhowTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(28px,4vw,52px);">
+        <sc-for list="{{ principles }}" as="pr" hint-placeholder-count="3">
+          <div style="border-top:2px solid #1B1A17;padding-top:18px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#BC4B2E;margin-bottom:14px;">{{ pr.num }}</div>
+            <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:27px;line-height:1.08;margin:0 0 12px;color:#1B1A17;">{{ pr.title }}</h3>
+            <p style="font-size:15px;line-height:1.6;color:#56524B;margin:0;">{{ pr.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack" style="border-top:1px solid rgba(27,26,23,0.12);">
+    <div style="max-width:1120px;margin:0 auto;padding:clamp(56px,9vw,104px) 28px;">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,56px);">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#BC4B2E;margin-bottom:16px;">{{ t.stackKicker }}</div>
+          <h2 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,5vw,56px);line-height:1.0;letter-spacing:-0.01em;margin:0;">{{ t.stackTitle }}</h2>
+        </div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#79746A;max-width:300px;line-height:1.6;">{{ t.stackNote }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(27,26,23,0.12);border:1px solid rgba(27,26,23,0.12);">
+        <sc-for list="{{ stackGroups }}" as="g" hint-placeholder-count="5">
+          <div style="background:#F5F2EC;padding:24px 22px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;margin-bottom:16px;">{{ g.label }}</div>
+            <div style="display:flex;flex-direction:column;gap:9px;">
+              <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="5">
+                <div style="font-size:14.5px;color:#33302B;line-height:1.3;">{{ it }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" style="border-top:1px solid rgba(27,26,23,0.12);background:#1B1A17;color:#EDE9E0;">
+    <div style="max-width:1120px;margin:0 auto;padding:clamp(72px,11vw,148px) 28px clamp(48px,6vw,72px);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#D98B6E;margin-bottom:22px;">{{ t.contactKicker }}</div>
+      <h2 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(48px,9vw,116px);line-height:0.95;letter-spacing:-0.02em;margin:0 0 26px;">{{ t.contactTitle }}</h2>
+      <p style="font-size:clamp(17px,2vw,21px);line-height:1.5;color:#B7B1A5;max-width:560px;margin:0 0 44px;">{{ t.contactSub }}</p>
+      <a href="mailto:dahoyosa6@gmail.com" style="text-decoration:none;display:inline-flex;align-items:center;gap:12px;font-family:'Instrument Serif',serif;font-size:clamp(26px,4vw,44px);color:#F2EEE5;border-bottom:1px solid rgba(242,238,229,0.3);padding-bottom:6px;transition:border-color .2s;" style-hover="border-color:#F2EEE5;">dahoyosa6@gmail.com<span style="color:#D98B6E;font-size:0.7em;">↗</span></a>
+      <div style="display:flex;flex-wrap:wrap;gap:14px 32px;margin-top:56px;padding-top:32px;border-top:1px solid rgba(237,233,224,0.14);font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#8E887C;">
+        <sc-for list="{{ footLinks }}" as="f" hint-placeholder-count="4">
+          <a href="{{ f.href }}" target="{{ f.target }}" rel="noopener" style="text-decoration:none;color:#CFC9BD;display:inline-flex;gap:7px;transition:color .15s;" style-hover="color:#F2EEE5;"><span style="color:#79746A;">{{ f.k }}</span>{{ f.v }}</a>
+        </sc-for>
+      </div>
+      <div style="margin-top:48px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6F695E;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <span>© 2026 David Hoyos · Medellín, Colombia</span>
+        <span>{{ t.footNote }}</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: 'es' };
+
+  setLang(l){ this.setState({ lang: l }); }
+
+  renderVals(){
+    const es = this.state.lang === 'es';
+    const p = (a,b)=> es ? a : b;
+
+    const btnBase = "font-family:'JetBrains Mono',monospace;font-size:12px;padding:5px 11px;border:none;cursor:pointer;letter-spacing:0.04em;transition:background .15s,color .15s;";
+    const on = btnBase + "background:#1B1A17;color:#F5F2EC;";
+    const off = btnBase + "background:transparent;color:#79746A;";
+
+    const navLinks = [
+      { href:'#proyectos', label: p('Proyectos','Work') },
+      { href:'#historia',  label: p('Historia','Story') },
+      { href:'#stack',     label: 'Stack' },
+      { href:'#contacto',  label: p('Contacto','Contact') },
+    ];
+
+    const heroLinks = [
+      { href:'https://github.com/dahoyosa6', label:'GitHub' },
+      { href:'https://linkedin.com/in/davidhoyosalzate', label:'LinkedIn' },
+      { href:'mailto:dahoyosa6@gmail.com', label:'Email' },
+      { href: es ? 'assets/CV_David_Hoyos_ES.pdf' : 'assets/CV_David_Hoyos_EN.pdf', label: p('CV (PDF)','CV (PDF)') },
+    ];
+
+    const RAW = [
+      { num:'01', name:'Saku',
+        subEs:'Motor de Ventas IA', subEn:'AI Sales Engine',
+        catEs:'Agente IA · WhatsApp · Multi-tenant', catEn:'AI agent · WhatsApp · Multi-tenant',
+        olEs:'Agente de ventas por WhatsApp para PyMEs de LatAm, multi-tenant desde el día uno y con suite de evals propia.',
+        olEn:'A WhatsApp sales agent for LatAm SMBs, multi-tenant from day one, with a custom eval suite.',
+        stEs:'Pre-piloto · pruebas internas', stEn:'Pre-pilot · internal testing',
+        glyph:'WHATSAPP · AGENTE', active:false, cover:'assets/cover-saku.png', pos:'center',
+        href:'Saku.dc.html', external:false,
+        llEs:'Ver caso', llEn:'View case', year:'2026' },
+      { num:'02', name:'FinanzasIQ',
+        subEs:'Sistema operativo de finanzas', subEn:'Personal-finance OS',
+        catEs:'Automatización · Pipeline · Seguridad', catEn:'Automation · Pipeline · Security',
+        olEs:'Finanzas que se alimentan solas: correo + OCR → clasificación → dashboard. En producción, uso diario.',
+        olEn:'Self-feeding finances: email + OCR → classification → dashboard. In production, daily use.',
+        stEs:'En producción · uso diario', stEn:'In production · daily use',
+        glyph:'DASHBOARD · PIPELINE', active:true, cover:'assets/cover-finanzasiq.png', pos:'center',
+        href:'FinanzasIQ.dc.html', external:false,
+        llEs:'Ver caso', llEn:'View case', year:'2026' },
+      { num:'03', name:'Momentum',
+        subEs:'Productividad', subEn:'Productivity',
+        catEs:'SaaS · PWA · Productividad', catEn:'SaaS · PWA · Productivity',
+        olEs:'Planea tu día en bloques, ejecútalo y compara plan vs. realidad. PWA con login de Google.',
+        olEn:'Plan your day in blocks, run it, and compare plan vs. reality. PWA with Google login.',
+        stEs:'En vivo', stEn:'Live',
+        glyph:'PWA · PLAN VS. REAL', active:true, cover:'assets/cover-momentum.png', pos:'center',
+        href:'https://momentum-plum-seven.vercel.app', external:true,
+        llEs:'Ver en vivo', llEn:'View live', year:'2026' },
+      { num:'04', name:'Nexo',
+        subEs:'Becas + matching', subEn:'Scholarships + matching',
+        catEs:'Pipeline de datos · Scraping · Matching', catEn:'Data pipeline · Scraping · Matching',
+        olEs:'Centraliza convocatorias de becas y las cruza con tu perfil por elegibilidad y afinidad. Robot de datos en vivo.',
+        olEn:'Centralizes scholarship calls and matches them to your profile by eligibility and affinity. Live data robot.',
+        stEs:'En vivo', stEn:'Live',
+        glyph:'BECAS · MATCHING', active:true, cover:'assets/cover-nexo.png', pos:'left top',
+        href:'https://nexo-opal-sigma.vercel.app', external:true,
+        llEs:'Ver en vivo', llEn:'View live', year:'2026' },
+      { num:'05', name:'AskDB',
+        subEs:'Analista por chat', subEn:'Chat data analyst',
+        catEs:'IA aplicada · Text-to-SQL · Voz', catEn:'Applied AI · Text-to-SQL · Voice',
+        olEs:'Un analista de negocio por chat: preguntas en español por Telegram y responde con datos, gráficas o Excel.',
+        olEn:'A business analyst over chat: ask in Spanish via Telegram and get data, charts, or Excel.',
+        stEs:'Repo público · deploy en proceso', stEn:'Public repo · deploying',
+        glyph:'TELEGRAM · TEXT-TO-SQL', active:false, cover:'assets/cover-askdb.png', pos:'center',
+        href:'https://github.com/dahoyosa6/askdb', external:true,
+        llEs:'Ver repo', llEn:'View repo', year:'2026' },
+    ];
+
+    const projects = RAW.map(r => ({
+      num:r.num, name:r.name, sub: p(r.subEs,r.subEn), cat: p(r.catEs,r.catEn),
+      oneLiner: p(r.olEs,r.olEn), statusLabel: p(r.stEs,r.stEn),
+      isActive: r.active, isInactive: !r.active,
+      coverGlyph: r.glyph, hasImage: !!r.cover, noImage: !r.cover,
+      coverEl: r.cover ? React.createElement('img', { src: r.cover, alt: r.name, style: { position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', objectPosition: r.pos || 'left top', display:'block' } }) : null,
+      href: r.href, target: r.external ? '_blank' : '_self',
+      rel: r.external ? 'noopener noreferrer' : '',
+      linkLabel: p(r.llEs,r.llEn), year:r.year,
+    }));
+
+    const story = [
+      { lead: p('De los planos a los prompts.','From blueprints to prompts.'),
+        body: p('Soy ingeniero mecánico. Empecé en el mundo de los planos y el diseño de producto, donde aprendí algo que no se olvida: un sistema mal pensado falla en el punto más caro. Ese rigor (tolerancias, modos de falla, mantenimiento) es el mismo que hoy aplico al software.',
+                'I\u2019m a mechanical engineer. I started in the world of blueprints and product design, where I learned something that sticks: a poorly thought-out system fails at the most expensive point. That rigor (tolerances, failure modes, maintenance) is the same one I now apply to software.') },
+      { lead: p('El descubrimiento.','The discovery.'),
+        body: p('Como ingeniero de producto noté un patrón: mi mayor impacto no venía del diseño mecánico, sino de automatizar lo repetitivo. Cuando llegó la IA generativa entendí que tenía la palanca para convertir esa intuición en método: dejé de hacer el trabajo manual y empecé a construir las herramientas que lo eliminan.',
+                'As a product engineer I noticed a pattern: my biggest impact didn\u2019t come from mechanical design, but from automating the repetitive. When generative AI arrived I realized I had the lever to turn that instinct into a method: I stopped doing the manual work and started building the tools that eliminate it.') },
+      { lead: p('Hoy.','Today.'),
+        body: p('Dirijo IA para construir y enviar productos reales. No escribo el código a mano: defino el producto, diseño la arquitectura, escribo las pruebas y los evals, y oriento a la IA con criterio de ingeniero. El resultado son sistemas que viven en producción y que otro equipo puede recibir y mantener.',
+                'I direct AI to build and ship real products. I don\u2019t hand-write the code: I define the product, design the architecture, write the tests and evals, and steer the AI with an engineer\u2019s judgment. The result is systems that live in production and that another team can take over and maintain.') },
+    ];
+
+    const principles = [
+      { num:'01', title: p('Construyo y envío, no demos.','I build and ship, not demos.'),
+        desc: p('Evidencia verificable: repos públicos, sistemas en producción de uso diario y cientos de tests.','Verifiable evidence: public repos, production systems in daily use, and hundreds of tests.') },
+      { num:'02', title: p('Mido y documento.','I measure and document.'),
+        desc: p('Cada proyecto trae métricas reales y documentación de handoff. Lo que no está medido lo marco como estimación.','Every project ships with real metrics and handoff docs. Anything unmeasured is labeled an estimate.') },
+      { num:'03', title: p('Pienso en sistemas.','I think in systems.'),
+        desc: p('No espero que me asignen tareas: detecto el trabajo manual, lo modelo y lo automatizo de raíz, cuidando seguridad y costos.','I don\u2019t wait to be assigned tasks: I spot manual work, model it, and automate it at the root, minding security and cost.') },
+    ];
+
+    const stackGroups = [
+      { label: p('IA aplicada','Applied AI'), items:['Claude / LLMs','LLM-as-judge','pgvector · RAG','OpenAI embeddings','Groq Whisper'] },
+      { label: p('Automatización','Automation'), items:['n8n','WhatsApp Cloud API','Telegram Bot API','GitHub Actions','Apps Script'] },
+      { label: p('Datos','Data'), items:['Supabase · Postgres','Neon','Google Sheets','SQL · ETL','RLS'] },
+      { label: p('Producto / Front','Product / Front'), items:['Next.js','TypeScript','Tailwind','Vanilla JS · Chart.js','PWA'] },
+      { label: p('Infra & seguridad','Infra & security'), items:['Vercel','Cloudflare Pages / Access','Railway','JWT · CSP','Least-privilege'] },
+    ];
+
+    const footLinks = [
+      { k:'EMAIL', v:'dahoyosa6@gmail.com', href:'mailto:dahoyosa6@gmail.com', target:'_self' },
+      { k:'TEL', v:'+57 320 315 4133', href:'tel:+573203154133', target:'_self' },
+      { k:'GITHUB', v:'/dahoyosa6', href:'https://github.com/dahoyosa6', target:'_blank' },
+      { k:'LINKEDIN', v:'/davidhoyosalzate', href:'https://linkedin.com/in/davidhoyosalzate', target:'_blank' },
+    ];
+
+    const t = {
+      cv:'CV',
+      availTag: p('Candidato · 30X Tech Volunteer','Candidate · 30X Tech Volunteer'),
+      kicker: p('Portafolio · 2026 · Medellín, CO','Portfolio · 2026 · Medellín, CO'),
+      headline1: p('Del torque','From torque'),
+      headline2: p('a los tokens','to tokens'),
+      heroSub: p('David Hoyos, ingeniero mecánico convertido en builder de productos con IA. Mismo rigor de ingeniería, nueva caja de herramientas.','David Hoyos, a mechanical engineer turned AI product builder. Same engineering rigor, new toolbox.'),
+      heroSub2: p('Convierto procesos manuales en agentes, automatizaciones y herramientas que viven en producción, con pruebas, seguridad operativa y documentación para que otro equipo los reciba sin fricción.','I turn manual processes into agents, automations, and tools that live in production, with tests, operational security, and docs so another team can take them over without friction.'),
+      workKicker: p('Trabajo seleccionado','Selected work'),
+      workTitle: p('Cinco cosas que construí y envié.','Five things I built and shipped.'),
+      workNote: p('Dos casos profundos y tres proyectos en vivo. Las métricas son reales; lo no medido va marcado como estimación.','Two deep cases and three live projects. Metrics are real; anything unmeasured is labeled an estimate.'),
+      storyKicker: p('Historia','Story'),
+      storyTitle: p('Cómo llegué aquí','How I got here'),
+      storyMeta: p('No vengo de ciencias de la computación, y eso es parte del punto. Lo que aporto es lo que escasea: ownership y pensamiento de sistemas.','I don\u2019t come from computer science, and that\u2019s part of the point. What I bring is what\u2019s scarce: ownership and systems thinking.'),
+      workhowKicker: p('Cómo trabajo','How I work'),
+      workhowTitle: p('Principios, no promesas.','Principles, not promises.'),
+      stackKicker: p('Herramientas','Tools'),
+      stackTitle: p('Lo que manejo','What I work with'),
+      stackNote: p('AI-first: dirijo la IA con criterio de producto. No es la lista de modas, es lo que está en producción.','AI-first: I direct AI with product judgment. Not a buzzword list, this is what\u2019s in production.'),
+      contactKicker: p('Contacto','Get in touch'),
+      contactTitle: p('¿Construimos algo?','Let\u2019s build something.'),
+      contactSub: p('Disponible para 30X y para cualquier equipo donde haya trabajo manual que valga la pena automatizar.','Available for 30X and for any team with manual work worth automating.'),
+      footNote: p('Hecho a mano, dirigiendo IA.','Handcrafted, by directing AI.'),
+    };
+
+    return {
+      navLinks, heroLinks, t,
+      featured: projects.slice(0,2), rest: projects.slice(2),
+      story, principles, stackGroups, footLinks,
+      cvHref: es ? 'assets/CV_David_Hoyos_ES.pdf' : 'assets/CV_David_Hoyos_EN.pdf',
+      esBtnStyle: es ? on : off,
+      enBtnStyle: es ? off : on,
+      setEs: () => this.setLang('es'),
+      setEn: () => this.setLang('en'),
+    };
+  }
+}
+</script>
+</body>
+</html>

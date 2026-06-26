@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #F5F2EC; color: #1B1A17; font-family: 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+::selection { background: #1B1A17; color: #F5F2EC; }
+a { color: inherit; }
+</style>
+</helmet>
+<div style="background:#F5F2EC;min-height:100vh;overflow-x:hidden;">
+
+  <header style="position:sticky;top:0;z-index:60;background:rgba(245,242,236,0.82);backdrop-filter:saturate(160%) blur(10px);-webkit-backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid rgba(27,26,23,0.10);">
+    <nav style="max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px;">
+      <a href="index.html" style="text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.03em;color:#1B1A17;display:inline-flex;align-items:center;gap:8px;" style-hover="color:#BC4B2E;"><span style="color:#BC4B2E;">←</span>{{ t.back }}</a>
+      <div style="display:flex;border:1px solid rgba(27,26,23,0.18);border-radius:7px;overflow:hidden;">
+        <button onClick="{{ setEs }}" style="{{ esBtnStyle }}">ES</button>
+        <button onClick="{{ setEn }}" style="{{ enBtnStyle }}">EN</button>
+      </div>
+    </nav>
+  </header>
+
+  <article style="max-width:920px;margin:0 auto;padding:0 28px;">
+
+    <!-- HERO -->
+    <div style="padding:clamp(48px,9vw,104px) 0 clamp(36px,5vw,56px);">
+      <div style="display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;color:#79746A;margin-bottom:30px;">
+        <span style="color:#BC4B2E;">{{ t.tag }}</span>
+        <span style="width:1px;height:13px;background:rgba(27,26,23,0.2);"></span>
+        <span>2026 · Builders</span>
+        <span style="width:1px;height:13px;background:rgba(27,26,23,0.2);"></span>
+        <span style="display:inline-flex;align-items:center;gap:7px;"><span style="width:7px;height:7px;border-radius:50%;border:1.5px solid #9C968A;display:inline-block;"></span>{{ t.status }}</span>
+      </div>
+      <h1 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(56px,11vw,128px);line-height:0.92;letter-spacing:-0.02em;margin:0 0 22px;">Saku<span style="font-style:italic;color:#BC4B2E;">.</span></h1>
+      <p style="font-family:'Instrument Serif',serif;font-size:clamp(24px,3.4vw,38px);line-height:1.12;color:#33302B;margin:0 0 22px;max-width:720px;">{{ t.tagline }}</p>
+      <p style="font-size:clamp(16px,2vw,19px);line-height:1.55;color:#56524B;max-width:640px;margin:0;">{{ t.oneLiner }}</p>
+    </div>
+
+    <!-- METRICS -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:rgba(27,26,23,0.12);border:1px solid rgba(27,26,23,0.12);margin-bottom:clamp(48px,7vw,80px);">
+      <sc-for list="{{ metrics }}" as="m" hint-placeholder-count="4">
+        <div style="background:#F5F2EC;padding:22px 20px;">
+          <div style="font-family:'Instrument Serif',serif;font-size:clamp(30px,4vw,42px);line-height:1;color:#1B1A17;">{{ m.v }}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.5;color:#79746A;margin-top:10px;">{{ m.k }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- PROBLEMA -->
+    <section style="display:grid;grid-template-columns:180px 1fr;gap:clamp(20px,4vw,56px);padding:clamp(36px,5vw,56px) 0;border-top:1px solid rgba(27,26,23,0.12);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;">{{ t.l_problem }}</div>
+      <div style="max-width:620px;">
+        <p style="font-size:clamp(17px,2.1vw,21px);line-height:1.55;color:#33302B;margin:0;">{{ t.problem }}</p>
+      </div>
+    </section>
+
+    <!-- SOLUCION -->
+    <section style="display:grid;grid-template-columns:180px 1fr;gap:clamp(20px,4vw,56px);padding:clamp(36px,5vw,56px) 0;border-top:1px solid rgba(27,26,23,0.12);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;">{{ t.l_solution }}</div>
+      <div style="max-width:620px;">
+        <p style="font-size:clamp(16px,1.9vw,18px);line-height:1.62;color:#403D37;margin:0 0 18px;">{{ t.solution }}</p>
+        <p style="font-size:clamp(16px,1.9vw,18px);line-height:1.62;color:#403D37;margin:0;">{{ t.solution2 }}</p>
+      </div>
+    </section>
+
+    <!-- CALLOUT decision -->
+    <section style="background:#1B1A17;color:#EDE9E0;border-radius:4px;padding:clamp(32px,5vw,52px);margin:clamp(20px,3vw,32px) 0 0;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#D98B6E;margin-bottom:18px;">{{ t.l_decision }}</div>
+      <p style="font-family:'Instrument Serif',serif;font-size:clamp(24px,3.4vw,36px);line-height:1.18;color:#F2EEE5;margin:0 0 18px;max-width:760px;">{{ t.decision }}</p>
+      <p style="font-size:15.5px;line-height:1.6;color:#B7B1A5;margin:0;max-width:680px;">{{ t.decisionSub }}</p>
+    </section>
+
+    <!-- EVALS highlight -->
+    <section style="display:grid;grid-template-columns:180px 1fr;gap:clamp(20px,4vw,56px);padding:clamp(40px,6vw,64px) 0 clamp(36px,5vw,56px);border-top:1px solid rgba(27,26,23,0.12);margin-top:clamp(40px,6vw,64px);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;">{{ t.l_evals }}</div>
+      <div style="max-width:620px;">
+        <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(24px,3vw,32px);line-height:1.1;margin:0 0 14px;">{{ t.evalsTitle }}</h3>
+        <p style="font-size:clamp(16px,1.9vw,18px);line-height:1.62;color:#403D37;margin:0;">{{ t.evals }}</p>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section style="display:grid;grid-template-columns:180px 1fr;gap:clamp(20px,4vw,56px);padding:clamp(36px,5vw,56px) 0;border-top:1px solid rgba(27,26,23,0.12);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;">Stack</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;max-width:620px;align-content:flex-start;">
+        <sc-for list="{{ stack }}" as="s" hint-placeholder-count="8">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#33302B;border:1px solid rgba(27,26,23,0.18);border-radius:999px;padding:6px 13px;">{{ s }}</span>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- LEARNED -->
+    <section style="padding:clamp(40px,6vw,72px) 0;border-top:1px solid rgba(27,26,23,0.12);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;margin-bottom:22px;">{{ t.l_learned }}</div>
+      <p style="font-family:'Instrument Serif',serif;font-size:clamp(28px,4.4vw,52px);line-height:1.12;letter-spacing:-0.01em;margin:0;max-width:840px;">{{ t.learned }}</p>
+    </section>
+
+    <!-- LINKS / status -->
+    <section style="padding:clamp(28px,4vw,40px) 0 clamp(56px,8vw,96px);border-top:1px solid rgba(27,26,23,0.12);">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;margin-bottom:16px;">{{ t.l_repo }}</div>
+      <a href="{{ t.repoHref }}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#1B1A17;border:1px solid rgba(27,26,23,0.25);border-radius:6px;padding:8px 14px;margin-bottom:20px;transition:background .15s,border-color .15s;" style-hover="background:rgba(27,26,23,0.05);border-color:#1B1A17;">{{ t.repoBtn }}<span style="color:#BC4B2E;">↗</span></a>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#79746A;margin:0;max-width:640px;">{{ t.repoNote }}</p>
+    </section>
+
+  </article>
+
+  <!-- FOOTER NAV -->
+  <footer style="background:#1B1A17;color:#EDE9E0;">
+    <div style="max-width:920px;margin:0 auto;padding:clamp(40px,6vw,64px) 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+      <a href="index.html" style="text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:13px;color:#CFC9BD;display:inline-flex;align-items:center;gap:8px;" style-hover="color:#F2EEE5;"><span style="color:#D98B6E;">←</span>{{ t.allProjects }}</a>
+      <a href="FinanzasIQ.dc.html" style="text-decoration:none;display:inline-flex;flex-direction:column;align-items:flex-end;gap:4px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8E887C;">{{ t.next }}</span>
+        <span style="font-family:'Instrument Serif',serif;font-size:28px;color:#F2EEE5;">FinanzasIQ <span style="color:#D98B6E;">→</span></span>
+      </a>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: 'es' };
+  setLang(l){ this.setState({ lang: l }); }
+  renderVals(){
+    const es = this.state.lang === 'es';
+    const p = (a,b)=> es ? a : b;
+    const btnBase = "font-family:'JetBrains Mono',monospace;font-size:12px;padding:5px 11px;border:none;cursor:pointer;letter-spacing:0.04em;";
+    const on = btnBase + "background:#1B1A17;color:#F5F2EC;";
+    const off = btnBase + "background:transparent;color:#79746A;";
+
+    const metrics = [
+      { v:'~80%', k: p('aciertos en evals · 84 conversaciones','eval accuracy · 84 conversations') },
+      { v:'860', k: p('SKUs · refresco diario (SICAR)','SKUs · daily refresh (SICAR)') },
+      { v:'~US$0.022', k: p('costo por turno','cost per turn') },
+      { v:'~21×', k: p('ROI · proyección / modelo','ROI · projection / model') },
+    ];
+
+    const stack = ['n8n','Supabase + pgvector','RLS · RPCs SECURITY DEFINER','WhatsApp Cloud API','MercadoPago (POC)','Python · ETL','Python · evals','LLM configurable','LLM-as-judge'];
+
+    const t = {
+      back: p('Portafolio','Portfolio'),
+      tag: p('Agente IA · WhatsApp · Multi-tenant','AI agent · WhatsApp · Multi-tenant'),
+      status: p('Pre-piloto · pruebas internas','Pre-pilot · internal testing'),
+      tagline: p('Un agente de ventas por WhatsApp para PyMEs de LatAm, multi-tenant desde el día uno.','A WhatsApp sales agent for LatAm SMBs, multi-tenant from day one.'),
+      oneLiner: p('Construido en 8 semanas en Builders (programa de Andrés Bilbao). El agente prospecta, califica, cotiza contra catálogo real, agenda y escala a humano cuando corresponde, 24/7.','Built in 8 weeks at Builders (Andrés Bilbao\u2019s program). The agent prospects, qualifies, quotes against a real catalog, schedules, and escalates to a human when needed, 24/7.'),
+      l_problem: p('El problema','The problem'),
+      problem: p('Las PyMEs comerciales de LatAm pierden ventas por no responder a tiempo en WhatsApp: consultas de precio, disponibilidad y catálogo que llegan a toda hora y que el dueño no alcanza a atender. El primer cliente real es una PyME de pinturas en Toluca, México, operada por su dueño.','LatAm commercial SMBs lose sales by not replying in time on WhatsApp: price, availability, and catalog questions arriving around the clock that the owner can\u2019t keep up with. The first real client is a paint SMB in Toluca, Mexico, run by its owner.'),
+      l_solution: p('La solución','The solution'),
+      solution: p('Un agente conversacional sobre WhatsApp orquestado en n8n, con búsqueda semántica del catálogo en pgvector y un ETL en Python que lo refresca a diario desde el sistema del cliente (SICAR). Datos aislados por inquilino con RLS y RPCs SECURITY DEFINER en Supabase.','A conversational agent on WhatsApp orchestrated in n8n, with semantic catalog search in pgvector and a Python ETL that refreshes it daily from the client\u2019s system (SICAR). Per-tenant data isolation with RLS and SECURITY DEFINER RPCs in Supabase.'),
+      solution2: p('Pago integrado como POC con MercadoPago. El LLM es configurable, y cada respuesta del agente se mide contra una suite de evals propia antes de considerarse buena.','Integrated payment as a POC with MercadoPago. The LLM is configurable, and every agent reply is measured against a custom eval suite before it counts as good.'),
+      l_decision: p('Decisión técnica clave','Key technical decision'),
+      decision: p('Separación estricta CORE vs. CONFIGURACIÓN desde el día uno: adaptar el agente a otra empresa es cambiar configuración, no código.','Strict CORE vs. CONFIGURATION separation from day one: adapting the agent to another company means changing configuration, not code.'),
+      decisionSub: p('El motor (core/) no contiene una sola referencia al cliente; todo lo específico vive en clients/<cliente>/: catálogo, prompts, políticas, FAQs. La regla es verificable con greps automatizados. La arquitectura multi-tenant se decide el día uno o nunca.','The engine (core/) contains zero client references; everything specific lives in clients/<client>/: catalog, prompts, policies, FAQs. The rule is enforced with automated greps. Multi-tenant architecture is decided on day one or never.'),
+      l_evals: p('De lo que más me enorgullece','What I\u2019m proudest of'),
+      evalsTitle: p('Una suite de evals propia','A custom eval suite'),
+      evals: p('84 conversaciones de prueba (escalamiento, stock, guardrails, multiturno, casos largos realistas), un juez LLM más verificaciones deterministas de precios contra catálogo, totales y detección de escalamiento, con triaje caso por caso. El agente no se mejora por intuición: cada iteración corre contra la suite y los fallos reales se convierten en el backlog. Un agente sin evals es una demo, no un producto.','84 test conversations (escalation, stock, guardrails, multi-turn, long realistic cases), an LLM judge plus deterministic checks on catalog-grounded prices, totals, and escalation detection, triaged case by case. The agent isn\u2019t improved by intuition: every iteration runs against the suite, and real failures become the backlog. An agent without evals is a demo, not a product.'),
+      l_learned: p('Lo que aprendí','What I learned'),
+      learned: p('Un agente sin evals es una demo, no un producto. Y la arquitectura multi-tenant se decide el día uno o nunca.','An agent without evals is a demo, not a product. And multi-tenant architecture is decided on day one or never.'),
+      l_repo: p('Estado y repo','Status & repo'),
+      repoBtn: p('Ver repo en GitHub','View repo on GitHub'),
+      repoHref: 'https://github.com/dahoyosa6/motor-ventas-ia',
+      repoNote: p('Estado: pre-piloto / pruebas internas, aún NO en producción ni en piloto con el cliente. Repo público sanitizado, sin datos del cliente. El ROI ~21× es una proyección de modelo con supuestos por validar, no una medición. Demo o recorrido disponible en entrevista.','Status: pre-pilot / internal testing, NOT yet in production nor in a live pilot with the client. Public sanitized repo, without client data. The ~21× ROI is a model projection with assumptions to validate, not a measurement. Demo or walkthrough available on request.'),
+      allProjects: p('Todos los proyectos','All projects'),
+      next: p('Siguiente caso','Next case'),
+    };
+
+    return {
+      t, metrics, stack,
+      esBtnStyle: es ? on : off,
+      enBtnStyle: es ? off : on,
+      setEs: () => this.setLang('es'),
+      setEn: () => this.setLang('en'),
+    };
+  }
+}
+</script>
+</body>
+</html>

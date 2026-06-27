@@ -99,15 +99,39 @@ a { color: inherit; }
         </div>
         <p style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#79746A;max-width:300px;line-height:1.7;margin:0;">{{ t.proofNote }}</p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(16px,2.4vw,26px);">
-        <sc-for list="{{ proofShots }}" as="ps" hint-placeholder-count="4">
-          <figure style="margin:0;">
-            <div style="position:relative;border:1px solid rgba(27,26,23,0.16);border-radius:16px;overflow:hidden;background:#0b0f14;box-shadow:0 1px 3px rgba(27,26,23,0.10);">
-              <img src="{{ ps.img }}" alt="{{ ps.cap }}" loading="lazy" style="display:block;width:100%;height:auto;">
-            </div>
-            <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.55;color:#56524B;margin-top:12px;"><span style="color:#BC4B2E;">{{ ps.num }} ·</span> {{ ps.cap }}</figcaption>
-          </figure>
-        </sc-for>
+      <div style="max-width:680px;display:flex;flex-direction:column;gap:12px;">
+
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#9C968A;align-self:flex-start;">{{ t.chatSender }}</div>
+
+        <div style="align-self:flex-end;background:#1B1A17;color:#EDE9E0;border-radius:16px;border-bottom-right-radius:4px;padding:11px 16px;max-width:82%;font-size:15px;line-height:1.5;">{{ t.chatU1 }}</div>
+
+        <div style="align-self:flex-start;background:#fff;border:1px solid rgba(27,26,23,0.10);color:#33302B;border-radius:16px;border-bottom-left-radius:4px;padding:12px 16px;max-width:82%;font-size:15px;line-height:1.5;">{{ t.chatA1 }}</div>
+        <div style="align-self:flex-start;display:flex;align-items:flex-start;gap:7px;margin:-1px 0 3px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.4;color:#BC4B2E;"><span>↳</span>{{ t.chatAn1 }}</div>
+
+        <div style="align-self:flex-end;background:#1B1A17;color:#EDE9E0;border-radius:16px;border-bottom-right-radius:4px;padding:11px 16px;max-width:82%;font-size:15px;line-height:1.5;">{{ t.chatU2 }}</div>
+
+        <div style="align-self:flex-start;background:#fff;border:1px solid rgba(27,26,23,0.10);color:#33302B;border-radius:16px;border-bottom-left-radius:4px;padding:12px 16px;max-width:82%;font-size:15px;line-height:1.5;">{{ t.chatA2 }}</div>
+        <div style="align-self:flex-start;display:flex;align-items:flex-start;gap:7px;margin:-1px 0 3px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.4;color:#BC4B2E;"><span>↳</span>{{ t.chatAn2 }}</div>
+
+        <div style="align-self:flex-start;display:inline-flex;align-items:center;gap:11px;background:#fff;border:1px solid rgba(27,26,23,0.12);border-radius:12px;padding:11px 15px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#BC4B2E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#1B1A17;">Cotizacion-COT-2026-0003.pdf</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9C968A;">127 KB · PDF</div>
+          </div>
+        </div>
+        <div style="align-self:flex-start;display:flex;align-items:flex-start;gap:7px;margin:-1px 0 3px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.4;color:#BC4B2E;"><span>↳</span>{{ t.chatAn3 }}</div>
+
+        <div style="align-self:flex-end;background:#1B1A17;color:#EDE9E0;border-radius:16px;border-bottom-right-radius:4px;padding:11px 16px;max-width:82%;font-size:15px;line-height:1.5;">{{ t.chatU3 }}</div>
+
+        <div style="align-self:flex-start;background:#fff;border:1px solid rgba(27,26,23,0.10);color:#33302B;border-radius:16px;border-bottom-left-radius:4px;padding:12px 16px;max-width:82%;font-size:15px;line-height:1.5;">{{ t.chatA3 }} <span style="color:#BC4B2E;border-bottom:1px solid rgba(188,75,46,0.4);">mercadopago.com/checkout…</span></div>
+
+        <div style="align-self:flex-start;display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid rgba(46,125,82,0.4);border-radius:12px;padding:10px 15px;">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2E7D52" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+          <span style="font-size:14px;color:#33302B;">{{ t.chatPaid }} · <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#79746A;">folio 5d527a68…</span></span>
+        </div>
+        <div style="align-self:flex-start;display:flex;align-items:flex-start;gap:7px;margin:-1px 0 3px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.4;color:#BC4B2E;"><span>↳</span>{{ t.chatAn4 }}</div>
+
       </div>
     </section>
 
@@ -169,18 +193,23 @@ class Component extends DCLogic {
 
     const stack = ['n8n','Supabase + pgvector','RLS · RPCs SECURITY DEFINER','WhatsApp Cloud API','MercadoPago (POC)','Python · ETL','Python · evals','LLM configurable','LLM-as-judge'];
 
-    const proofShots = [
-      { num:'01', img:'assets/saku-chat-1.jpg', cap: p('Recibe al cliente, entiende qué necesita y recomienda producto (METALEX vs. Osel) con criterio.','Greets the lead, gets the need, and recommends a product (METALEX vs. Osel) with judgment.') },
-      { num:'02', img:'assets/saku-chat-2.jpg', cap: p('Responde sobre catálogo real: colores, presentaciones y precios. No inventa.','Answers from the real catalog: colors, sizes and prices. It doesn’t make things up.') },
-      { num:'03', img:'assets/saku-chat-3.jpg', cap: p('Emite la cotización formal (folio COT-2026-0003) y genera el PDF al instante.','Issues the formal quote (ref COT-2026-0003) and generates the PDF on the spot.') },
-      { num:'04', img:'assets/saku-chat-4.jpg', cap: p('Cierra la venta: envía el link de pago (MercadoPago) y confirma “Pago recibido”.','Closes the sale: sends the payment link (MercadoPago) and confirms “Payment received”.') },
-    ];
-
     const t = {
       back: p('Portafolio','Portfolio'),
       l_proof: p('El agente en acción','The agent in action'),
       proofTitle: p('Una venta real, de principio a fin.','A real sale, end to end.'),
       proofNote: p('Conversación real por WhatsApp (cliente de ejemplo): del saludo al pago, sin intervención del vendedor.','A real WhatsApp conversation (sample client): from hello to payment, with no seller in the loop.'),
+      chatSender: p('Saku · agente de ventas','Saku · sales agent'),
+      chatU1: p('tienes pintura para estructura metálica?','do you have paint for metal structures?'),
+      chatA1: p('Para estructura metálica te recomiendo dos opciones: Sherwin-Williams METALEX (esmalte alquídico, rinde hasta 17 m²/L) y Osel industrial (anticorrosivo, más económico). ¿Cuál te late?','For metal structures I’d recommend two options: Sherwin-Williams METALEX (alkyd enamel, covers up to 17 m²/L) and Osel industrial (anti-corrosive, cheaper). Which one sounds good?'),
+      chatAn1: p('recomienda con criterio, no solo lista productos','recommends with judgment, not just a product list'),
+      chatU2: p('necesito 3 cubetas de amarillo limón','I need 3 buckets of lemon yellow'),
+      chatA2: p('Perfecto: 3 × METALEX Amarillo Limón — $14,385.00 MXN · vigencia 7 días. ¿Te la aparto o necesitas algo más?','Got it: 3 × METALEX Lemon Yellow — $14,385.00 MXN · valid for 7 days. Shall I reserve it, or do you need anything else?'),
+      chatAn2: p('cotiza contra catálogo real, no inventa precios','quotes from the real catalog, no made-up prices'),
+      chatAn3: p('emite el folio y genera el PDF al instante','issues the ref and generates the PDF on the spot'),
+      chatU3: p('sí, confírmalo','yes, confirm it'),
+      chatA3: p('Listo, aquí está tu link de pago seguro:','Done, here’s your secure payment link:'),
+      chatPaid: p('Pago recibido','Payment received'),
+      chatAn4: p('cobra con MercadoPago y confirma el pago','charges via MercadoPago and confirms payment'),
       tag: p('Agente IA · WhatsApp · Multi-tenant','AI agent · WhatsApp · Multi-tenant'),
       status: p('Pre-piloto · pruebas internas','Pre-pilot · internal testing'),
       tagline: p('Un agente de ventas por WhatsApp para PyMEs de LatAm, multi-tenant desde el día uno.','A WhatsApp sales agent for LatAm SMBs, multi-tenant from day one.'),
@@ -207,7 +236,7 @@ class Component extends DCLogic {
     };
 
     return {
-      t, metrics, stack, proofShots,
+      t, metrics, stack,
       esBtnStyle: es ? on : off,
       enBtnStyle: es ? off : on,
       setEs: () => this.setLang('es'),

@@ -17,6 +17,9 @@ html { scroll-behavior: smooth; }
 body { margin: 0; background: #F5F2EC; color: #1B1A17; font-family: 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 ::selection { background: #1B1A17; color: #F5F2EC; }
 a { color: inherit; }
+@media (max-width: 640px) {
+  section[style*="180px 1fr"] { grid-template-columns: 1fr !important; gap: 10px !important; }
+}
 </style>
 </helmet>
 <div style="background:#F5F2EC;min-height:100vh;overflow-x:hidden;">

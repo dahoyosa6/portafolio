@@ -90,6 +90,27 @@ a { color: inherit; }
       </div>
     </section>
 
+    <!-- EVIDENCIA: el agente en acción -->
+    <section style="padding:clamp(40px,6vw,64px) 0;border-top:1px solid rgba(27,26,23,0.12);">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,44px);">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;margin-bottom:14px;">{{ t.l_proof }}</div>
+          <h3 style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(26px,3.6vw,40px);line-height:1.05;margin:0;max-width:540px;">{{ t.proofTitle }}</h3>
+        </div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#79746A;max-width:300px;line-height:1.7;margin:0;">{{ t.proofNote }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(16px,2.4vw,26px);">
+        <sc-for list="{{ proofShots }}" as="ps" hint-placeholder-count="4">
+          <figure style="margin:0;">
+            <div style="position:relative;border:1px solid rgba(27,26,23,0.16);border-radius:16px;overflow:hidden;background:#0b0f14;box-shadow:0 1px 3px rgba(27,26,23,0.10);">
+              <img src="{{ ps.img }}" alt="{{ ps.cap }}" loading="lazy" style="display:block;width:100%;height:auto;">
+            </div>
+            <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.55;color:#56524B;margin-top:12px;"><span style="color:#BC4B2E;">{{ ps.num }} ·</span> {{ ps.cap }}</figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </section>
+
     <!-- STACK -->
     <section style="display:grid;grid-template-columns:180px 1fr;gap:clamp(20px,4vw,56px);padding:clamp(36px,5vw,56px) 0;border-top:1px solid rgba(27,26,23,0.12);">
       <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#BC4B2E;">Stack</div>
@@ -148,8 +169,18 @@ class Component extends DCLogic {
 
     const stack = ['n8n','Supabase + pgvector','RLS · RPCs SECURITY DEFINER','WhatsApp Cloud API','MercadoPago (POC)','Python · ETL','Python · evals','LLM configurable','LLM-as-judge'];
 
+    const proofShots = [
+      { num:'01', img:'assets/saku-chat-1.jpg', cap: p('Recibe al cliente, entiende qué necesita y recomienda producto (METALEX vs. Osel) con criterio.','Greets the lead, gets the need, and recommends a product (METALEX vs. Osel) with judgment.') },
+      { num:'02', img:'assets/saku-chat-2.jpg', cap: p('Responde sobre catálogo real: colores, presentaciones y precios. No inventa.','Answers from the real catalog: colors, sizes and prices. It doesn’t make things up.') },
+      { num:'03', img:'assets/saku-chat-3.jpg', cap: p('Emite la cotización formal (folio COT-2026-0003) y genera el PDF al instante.','Issues the formal quote (ref COT-2026-0003) and generates the PDF on the spot.') },
+      { num:'04', img:'assets/saku-chat-4.jpg', cap: p('Cierra la venta: envía el link de pago (MercadoPago) y confirma “Pago recibido”.','Closes the sale: sends the payment link (MercadoPago) and confirms “Payment received”.') },
+    ];
+
     const t = {
       back: p('Portafolio','Portfolio'),
+      l_proof: p('El agente en acción','The agent in action'),
+      proofTitle: p('Una venta real, de principio a fin.','A real sale, end to end.'),
+      proofNote: p('Conversación real por WhatsApp (cliente de ejemplo): del saludo al pago, sin intervención del vendedor.','A real WhatsApp conversation (sample client): from hello to payment, with no seller in the loop.'),
       tag: p('Agente IA · WhatsApp · Multi-tenant','AI agent · WhatsApp · Multi-tenant'),
       status: p('Pre-piloto · pruebas internas','Pre-pilot · internal testing'),
       tagline: p('Un agente de ventas por WhatsApp para PyMEs de LatAm, multi-tenant desde el día uno.','A WhatsApp sales agent for LatAm SMBs, multi-tenant from day one.'),
@@ -176,7 +207,7 @@ class Component extends DCLogic {
     };
 
     return {
-      t, metrics, stack,
+      t, metrics, stack, proofShots,
       esBtnStyle: es ? on : off,
       enBtnStyle: es ? off : on,
       setEs: () => this.setLang('es'),
